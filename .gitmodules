@@ -1,0 +1,6 @@
+[submodule "vendor/scripty2"]
+	path = vendor/scripty2
+	url = git://github.com/madrobby/scripty2.git
+[submodule "vendor/prototype"]
+	path = vendor/prototype
+	url = http://github.com/sstephenson/prototype.git
