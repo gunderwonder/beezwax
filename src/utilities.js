@@ -1,3 +1,7 @@
+/**
+ * Beezwax.symbol() => String
+ *  gensym for JavaScript
+ **/
 Beezwax.symbol = (function() {
 	var counter = 0;
 	return function() { return '__s' + ++counter };

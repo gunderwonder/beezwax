@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Placeholder tests</title>
+	<script src="../build/beezwax.js"></script>
+
+	<script type="text/javascript" charset="utf-8">	
+		document.on('dom:loaded', function() {
+			
+			$$(Beezwax.Behavior.PlaceholderInput.SELECTOR).each(function(element) {
+				S2.UI.addBehavior(element, Beezwax.Behavior.PlaceholderInput);
+			});
+		});
+	</script>
+	
+	<style type="text/css" media="screen">
+		
+		.ui-state-placeholder-input { color: red; }
+		input::-webkit-input-placeholder { color: red; }
+	</style>
+</head>
+<body>
+	
+	<input id="p" style="font-size: 20px;" type="text" placeholder="Placeholder text" />
+	<ul>
+		<li>Placeholder text should appear as "Placeholder text"</li>
+		<li>Placeholder text should be colored red</li>
+		<li>Placeholder text should disappear if it <button onclick="$('p').focus()">gains focus</button>
+			and does not contain user input.
+		</li>
+		<li>Placeholder text should appear when it <button onclick="$('p').blur()">looses focus</button>
+			and does not contain user input.
+		</li>
+		
+		<li>Placeholder text should not be stored by the browser's autofill cache when <button onclick="window.location.reload();">refeshing</button>. (If it is, the text should appear as black.)</li>
+	</ul>
+</body>
+</html>
