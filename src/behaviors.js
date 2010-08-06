@@ -1,4 +1,5 @@
 Beezwax.Behavior = {};
 
-//= require "behaviors/placeholder.js"
+//= require "behaviors/placeholder"
+//= require "behaviors/intercept_tabstop"
 
