@@ -1,46 +1,56 @@
+/** section: beezwax behavior
+ * class Beezwax.Behavior.PlaceholderInput < S2.UI.Behavior
+ *  
+ * A behavior which simulates support HTML5's `placeholder` attribute.
+ **/
 Beezwax.Behavior.PlaceholderInput = Class.create(S2.UI.Behavior, {
 	initialize : function($super, element, options) {
 		$super(element, options);
-		this.window = window;
 		
 		/* don't apply behavior if the browser supports placeholder attribute
 		 * or if placeholder is omitted
 		 */ 
-		if (this.supportsPlaceholderText()) return;
+		if (this._supportsPlaceholderText()) {
+			this.destroy();
+			return;
+		}
 		this.text = this.placeholderText();
 		if (!this.text) return;
 		
-		// clean up 
-		this._remover = this.removePlaceholderText.bind(this);
+		// clean up when window unloads
+		this._remover = this._removePlaceholderText.bind(this);
 		Event.on(window, 'unload', this._remover);
-		this.addPlaceholderText();
+		
+		// insert placeholder text on initialization
+		this._addPlaceholderText();
 	},
 	
-	supportsPlaceholderText : function() {
+	// check for native support
+	_supportsPlaceholderText : function() {
 		return !!('placeholder' in document.createElement('input'));
+	},
+	
+	_addPlaceholderText : function() {
+		if (!this.element.getValue())
+			this.element.addClassName(this.options.placeholderClass).setValue(this.text);
+	},
+	
+	_removePlaceholderText : function() {
+		if (this.element.hasClassName(this.options.placeholderClass))
+			this.element.clear().removeClassName(this.options.placeholderClass); 
 	},
 	
 	/**
 	 * Beezwax.Behavior.PlaceholderInput#placeholderText
 	 * override this method if alternate source for placeholder text is required
-	 *  (such as the title attribute or a data-* attribute) 
+	 * (such as the title attribute or a `data-*` attribute) 
      **/
 	placeholderText : function() {
 		return this.element.readAttribute('placeholder');
 	},
 	
-	addPlaceholderText : function() {
-		if (!this.element.getValue())
-			this.element.addClassName(this.options.placeholderClass).setValue(this.text);
-	},
-	
-	removePlaceholderText : function() {
-		if (this.element.hasClassName(this.options.placeholderClass))
-			this.element.clear().removeClassName(this.options.placeholderClass); 
-	},
-	
-	onFocus : function() { this.removePlaceholderText(); },
-	onBlur : function() { this.addPlaceholderText(); },
+	onfocus : function() { this._removePlaceholderText(); },
+	onblur : function() { this._addPlaceholderText(); },
 	
 	destroy : function($super) {
 		$super();
@@ -51,9 +61,9 @@ Beezwax.Behavior.PlaceholderInput = Class.create(S2.UI.Behavior, {
 
 Object.extend(Beezwax.Behavior.PlaceholderInput, {
 	DEFAULT_OPTIONS : {
-		placeholderClass : 'ui-state-placeholder-input',
-		window : window
+		placeholderClass : 'ui-state-placeholder-input'
 	},
 	
+	// selector to target input fields with placeholder text
 	SELECTOR : 'input[type=text][placeholder], textarea[placeholder]'
 });
