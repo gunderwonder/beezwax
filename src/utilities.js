@@ -4,7 +4,7 @@
  **/
 Beezwax.symbol = (function() {
 	var counter = 0;
-	return function() { return '__s' + ++counter };
+	return function() { return '__gensym__' + ++counter };
 })();
 
 /**
