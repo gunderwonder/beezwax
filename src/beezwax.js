@@ -1,8 +1,8 @@
-//= require <prototype>
-//= require <s2>
-
 var Beezwax = { }
 
-//= require "extensions.js"
-//= require "utilities.js"
-//= require "behaviors.js"
+//= require "extensions"
+//= require "string"
+//= require "element"
+//= require "utilities"
+//= require "ajax"
+//= require "behaviors"
