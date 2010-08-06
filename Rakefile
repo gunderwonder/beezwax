@@ -15,7 +15,7 @@ task :build => ['lib/prototype.s2.min.js', BEEZWAX_BUILD_PATH] do
 	
 	secretary = Sprockets::Secretary.new(
       :load_path      => BEEZWAX_LOAD_PATH,
-      :source_files   => BEEZWAX_SOURCE_DIRECTORY + '/*.js'
+      :source_files   => BEEZWAX_SOURCE_DIRECTORY + '/beezwax.js'
     )
     secretary.concatenation.save_to(File.join(BEEZWAX_BUILD_PATH, 'beezwax.js'))
 	# minify File.join(BEEZWAX_BUILD_PATH, 'beezwax.js'), File.join(BEEZWAX_BUILD_PATH, 'beezwax.min.js')
