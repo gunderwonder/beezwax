@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Placeholder tests</title>
+	<title>Placeholder</title>
+	<script src="../lib/prototype.js"></script>
+	<script src="../lib/s2.js"></script>
 	<script src="../build/beezwax.js"></script>
 
 	<script type="text/javascript" charset="utf-8">	
 		document.on('dom:loaded', function() {
-			
 			$$(Beezwax.Behavior.PlaceholderInput.SELECTOR).each(function(element) {
 				S2.UI.addBehavior(element, Beezwax.Behavior.PlaceholderInput);
 			});
@@ -14,9 +15,9 @@
 	</script>
 	
 	<style type="text/css" media="screen">
-		
+		input::-webkit-input-placeholder { color: red; }
 		.ui-state-placeholder-input { color: red; }
-		input::-webkit-input-placeholder { color: red; }
+		
 	</style>
 </head>
 <body>

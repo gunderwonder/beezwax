@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tabstop</title>
+	<script src="../lib/prototype.js"></script>
+	<script src="../lib/s2.js"></script>
+	<script src="../build/beezwax.js"></script>
+
+	<script type="text/javascript" charset="utf-8">	
+		document.on('dom:loaded', function() {
+			S2.UI.addBehavior($('intercept'), Beezwax.Behavior.InterceptTabstop);
+		});
+	</script>
+	
+</head>
+<body>
+	<textarea id="intercept" cols="40" rows="5">function() {
+	alert('Hello, world!');
+}</textarea>
+	<ul>
+		<li>Pressing tab inside the above textarea should insert a tab character instead of moving focus.</li>
+	</ul>
+</body>
+</html>
