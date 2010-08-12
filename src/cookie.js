@@ -50,7 +50,7 @@ Beezwax.Cookie = {
  	 * - fallback (Object):
  	 **/
 	get : function(key, fallback) {
-		fallback = fallback || null;
+		fallback = fallback || undefined;
 		try {
 			var cookie = document.cookie.match(key + '=(.*?)(;|$)');
 			return cookie ? window.unescape(cookie[1]).evalJSON() : fallback;
