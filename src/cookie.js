@@ -12,7 +12,7 @@ Beezwax.Cookie = {
 	},
 	
 	/**
- 	 * Beezwax.Cookie.remove(key, value[, options]) -> Beezwax.Cookie
+ 	 * Beezwax.Cookie.remove(key, value[, options]) -> Object
  	 * - key (String):
  	 * - value (Object | String | Number | Array):
  	 * - options (Object | Hash):
@@ -27,20 +27,21 @@ Beezwax.Cookie = {
 		document.cookie = COOKIE_TEMPLATE.interpolate({
 			key : key,
 			json : value != null ? window.escape(Object.toJSON(value)) : '',
-			expiry : expiryDate(options.expiry),
+			expiry : _expiryDate(options.expiry),
 			path : options.path,
 			domain : options.domain
 		});
-		return this;
+		return value;
 	}},
 	
 	/**
- 	 * Beezwax.Cookie.remove(key) -> Beezwax.Cookie
+ 	 * Beezwax.Cookie.remove(key) -> Object
  	 * - key (String):
  	 **/
 	remove : function(key) { with(Beezwax.Cookie) {
+		var value = get(key);
 		set(key, null, { expiry : -3600 });
-		return Beezwax.Cookie;
+		return value;
 	}},
 	
 	/**
