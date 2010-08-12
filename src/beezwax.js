@@ -5,6 +5,7 @@ var Beezwax = { }
 
 //= require "extensions"
 //= require "string"
+//= require "cookie"
 //= require "element"
 //= require "utilities"
 //= require "ajax"
