@@ -100,7 +100,7 @@ Beezwax.URL = {
 			
 			pollRate = pollRate || .15;
 			hash = window.location.hash;
-			if (hash) fire(hash);			
+			if (hash) responder();			
 			if (listener == null) {
 				listener = new PeriodicalExecuter(function() {
 					if (window.location.hash != hash) 
