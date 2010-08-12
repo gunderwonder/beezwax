@@ -33,7 +33,7 @@ Beezwax.load = (function() {
  **/
 Beezwax.JSONP = function(url, callback, options) {
 	var responder = Beezwax.symbol(),
-		options = Object.extend({ responder : 'callback' }, options || {},
+		options = Object.extend({ responder : 'callback' }, options || {}),
 		url = url + (!url.include('?') ? '?' : '&') + options.responder + '=' + responder;
 	window[responder] = function(data) { 
 		callback(data);
