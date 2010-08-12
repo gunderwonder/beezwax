@@ -10,12 +10,11 @@ Beezwax.Behavior.PlaceholderInput = Class.create(S2.UI.Behavior, {
 		/* don't apply behavior if the browser supports placeholder attribute
 		 * or if placeholder is omitted
 		 */ 
-		if (this._supportsPlaceholderText()) {
+		this.text = this.placeholderText();
+		if (!this.text || this._supportsPlaceholderText()) {
 			this.destroy();
 			return;
 		}
-		this.text = this.placeholderText();
-		if (!this.text) return;
 		
 		// clean up when window unloads
 		this._remover = this._removePlaceholderText.bind(this);
