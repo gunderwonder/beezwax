@@ -22,7 +22,8 @@ Beezwax.HTML = {
 	 **/
 	flattenAttributes : function(attributes) {
 		return $H(attributes).collect(function(attribute) {
-			return attribute.key + '="' + Beezwax.HTML.escapeQuotes(attribute.value) + '"';
+			var value = Object.isArray(attribute.value) ? attribute.value.join(' ') : attribute.value;
+			return attribute.key + '="' + Beezwax.HTML.escapeQuotes(value) + '"';
 		}).join(' ');
 	},
 	
