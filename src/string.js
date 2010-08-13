@@ -35,8 +35,8 @@ Beezwax.HTML = {
 	 **/
 	linkify : function(text, attributes, shorten) {
 		return text.gsub(Beezwax.HTML.LINK_PATTERN, function(m) {
-			var url = m[1], shortened = url;
-			if (shorten && url.length > 30) shortened = url.substring(0, shorten) + '…';
+			var url = m[1], shortened = url.gsub(/^(https?:\/\/)/, '');
+			if (shorten && url.length > shorten) shortened = shortened.substring(0, shorten) + '…';
 			attributes = Beezwax.HTML.flattenAttributes(
 				Object.extend(attributes || {}, { href : url })
 			);
