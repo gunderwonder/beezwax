@@ -12,7 +12,7 @@ Beezwax.HTML = {
 	 **/
 	escapeQuotes : function(string) {
 		return string.escapeHTML().gsub(/"|\'/, function(m) {
-			return m[0] == '"' ? '&quot;' : '&#039';
+			return m[0] == '"' ? '&quot;' : '&#039;';
 		}) 
 	},
 
