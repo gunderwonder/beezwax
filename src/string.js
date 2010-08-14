@@ -48,3 +48,34 @@ Beezwax.HTML = (function() {
 		linkify : linkify
 	};
 })();
+
+/**
+ * RegExp#reverse([args...]) -> String
+ * Reverse a regular expression against a list of arguments. E.g.:
+ * 		/(\d+)(\w+)/.reverse(1, 'foo') -> '1foo'
+ **/
+RegExp.prototype.reverse = function() {
+	var REGEX_SUBPATTERN_RE = /\((.*?)\)/g,
+		parameters = $A(arguments),
+		pattern = this.toString().gsub(/(^\/|\/$)/, ''),
+		matches = pattern.match(REGEX_SUBPATTERN_RE);
+		
+	if (matches && matches.length > parameters.length)
+		throw 'Insufficient number of arguments to resolve /' + pattern + '/';
+	
+	var resolved = pattern, subpattern;
+	if (matches)
+		matches.zip(parameters, function(pair) {
+			subpattern = pair[0], replacement = pair[1];
+			
+			// validate result
+			if (!replacement.toString().match(new RegExp(subpattern))) 
+				throw "Subpattern '" + subpattern + "' doesn't match '" + replacement + "'";
+				
+			// resolve the replacement
+			resolved = resolved.replace(subpattern, replacement);
+		})
+	
+	// remove special regex operators
+	return resolved.gsub(/[\^\$\?]/, '');
+}
