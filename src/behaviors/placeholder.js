@@ -16,9 +16,10 @@ Beezwax.Behavior.PlaceholderInput = Class.create(S2.UI.Behavior, {
 			return;
 		}
 		
-		// clean up when window unloads
+		// clean up before window unloads/form submits
 		this._remover = this._removePlaceholderText.bind(this);
 		Event.on(window, 'unload', this._remover);
+		if (element.form) element.form.on('submit', this._remover);
 		
 		// insert placeholder text on initialization
 		this._addPlaceholderText();

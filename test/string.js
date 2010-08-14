@@ -56,4 +56,31 @@ test('Beezwax.HTML.linkify()', function() {
 	);
 })
 
+test('RegExp.reverse()', function() {
+	same(/(\d+)/.reverse(1), '1');
+	same(/(\d+), (\w+)/.reverse(1, 'foobar'), '1, foobar');
+	(function() {
+		try {
+			/(\d+), (\w+)/.reverse(1);
+		} catch (e) {
+			ok(true, 'Insufficient arguments')
+			console.log(e);
+			return;
+		}
+		ok(false, 'Insufficient arguments');
+	})();
+	
+	(function() {
+		try {
+			/(\d+), (\d+)/.reverse(1, 'a'); // wrong character class for `a`
+		} catch (e) {
+			ok(true, 'Invalid arguments');
+			return;
+		}
+		ok(false, 'Invalid arguments');
+	})();
+	
+	
+})
+
 }
