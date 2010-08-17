@@ -22,7 +22,10 @@
 </head>
 <body>
 	
-	<input id="p" style="font-size: 20px;" type="text" placeholder="Placeholder text" />
+<form method="get" id="f">
+	<input id="p" name="p" style="font-size: 20px;" type="text" placeholder="Placeholder text" />
+	<input type="submit" id="s"/>
+</form>
 	<ul>
 		<li>Placeholder text should appear as "Placeholder text"</li>
 		<li>Placeholder text should be colored red</li>
@@ -34,6 +37,7 @@
 		</li>
 		
 		<li>Placeholder text should not be stored by the browser's autofill cache when <button onclick="window.location.reload();">refeshing</button>. (If it is, the text should appear as black.)</li>
+		<li>Placeholder text should be ommitted when the form is <button onclick="$('s').click();">submitted </button>
 	</ul>
 </body>
 </html>
